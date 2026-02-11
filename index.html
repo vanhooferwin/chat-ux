@@ -76,9 +76,9 @@
       }
 
       .lucide { width: 16px; height: 16px; }
-      .muted { color: #9ca3af; }
       .pin { color: #dc2626; }
       .pin.off { color: #d1d5db; }
+      .visibility-off { color: #d1d5db; }
 
       .example-row {
         display: inline-flex;
@@ -166,19 +166,30 @@
   <body>
     <h1>Chat UX – Rol × nieuw bericht</h1>
     <p>
-      Matrix met <strong>alle toegestane combinaties</strong> voor Admin A en Admin B.
-      Het rode bolletje verschijnt alleen bij <em>volgen</em>.
-      Als een admin het bericht leest, verdwijnt het bolletje voor die admin.
-      <strong>Mute ziet nooit een notificatie.</strong>
+      Notificaties gelden alleen voor berichten tussen <strong>admin</strong> en <strong>adviseur</strong>
+      (en andersom). Als een admin een bericht stuurt, krijgt de andere admin geen notificatie.
     </p>
+    <p>
+      <strong>Altijd zichtbaar:</strong> Het dossier is te allen tijde boven in de werkvoorraad zichtbaar,
+      ook al is er een filter actief.
+    </p>
+    <p>
+      <strong>Niet altijd zichtbaar:</strong> Het dossier is enkel zichtbaar als er geen filter actief is
+      of als het dossier voldoet aan de filtercriteria.
+    </p>
+
     <p>
       Legenda migratie: het <strong>rode bolletje</strong> is de vervanging van de
       <strong>zwarte kleur</strong> uit de oude implementatie. De <strong>pin</strong>
       is de vervanging van de <strong>blauwe kleur</strong>.
     </p>
-
     <!-- ===================== TABLE 1 ===================== -->
     <h2>Rol × nieuw bericht (matrix)</h2>
+    <p>
+      Matrix met <strong>alle toegestane combinaties</strong> voor Admin A en Admin B.
+      Het rode bolletje verschijnt alleen bij <em>altijd zichtbaar</em>.
+      Als een admin het bericht leest, verdwijnt het bolletje voor die admin.
+    </p>
 
     <table>
       <thead>
@@ -191,32 +202,27 @@
       <tbody>
         <!-- 1 -->
         <tr>
-          <td class="left">A volgt – B volgt</td>
-          <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="eye"></i></td>
+          <td class="left">A niet altijd zichtbaar – B niet altijd zichtbaar</td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
         </tr>
 
         <!-- 2 -->
         <tr>
-          <td class="left">A volgt – B volgt (nieuw bericht)</td>
-          <td>
-            <span class="icon-stack">
-              <i data-lucide="eye"></i>
-              <span class="badge-dot"></span>
-            </span>
-          </td>
-          <td>
-            <span class="icon-stack">
-              <i data-lucide="eye"></i>
-              <span class="badge-dot"></span>
-            </span>
-          </td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar</td>
+          <td><i data-lucide="eye"></i></td>
+          <td><i data-lucide="eye"></i></td>
         </tr>
 
         <!-- 3 -->
         <tr>
-          <td class="left">A volgt – B volgt (na lezen door A)</td>
-          <td><i data-lucide="eye"></i></td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar (nieuw bericht van adviseur)</td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot"></span>
+            </span>
+          </td>
           <td>
             <span class="icon-stack">
               <i data-lucide="eye"></i>
@@ -227,73 +233,50 @@
 
         <!-- 4 -->
         <tr>
-          <td class="left">A volgt – B volgt (na lezen door B)</td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar (na lezen door A)</td>
+          <td><i data-lucide="eye"></i></td>
           <td>
             <span class="icon-stack">
               <i data-lucide="eye"></i>
               <span class="badge-dot"></span>
             </span>
           </td>
-          <td><i data-lucide="eye"></i></td>
         </tr>
 
         <!-- 5 -->
         <tr>
-          <td class="left">A volgt – B mute</td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar (na lezen door B)</td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot"></span>
+            </span>
+          </td>
           <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
         </tr>
 
         <!-- 6 -->
         <tr>
-          <td class="left">A volgt – B mute (nieuw bericht)</td>
-          <td>
-            <span class="icon-stack">
-              <i data-lucide="eye"></i>
-              <span class="badge-dot"></span>
-            </span>
-          </td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar (Admin A stuurt bericht)</td>
+          <td><i data-lucide="eye"></i></td>
+          <td><i data-lucide="eye"></i></td>
         </tr>
 
         <!-- 7 -->
         <tr>
-          <td class="left">A mute – B volgt</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
+          <td class="left">A altijd zichtbaar – B altijd zichtbaar (Admin B stuurt bericht)</td>
           <td><i data-lucide="eye"></i></td>
-        </tr>
-
-        <!-- 8 -->
-        <tr>
-          <td class="left">A mute – B volgt (B wil mute, niet toegestaan)</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
           <td><i data-lucide="eye"></i></td>
-        </tr>
-
-        <!-- 9 -->
-        <tr>
-          <td class="left">A mute – B volgt (nieuw bericht)</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
-          <td>
-            <span class="icon-stack">
-              <i data-lucide="eye"></i>
-              <span class="badge-dot"></span>
-            </span>
-          </td>
         </tr>
       </tbody>
     </table>
-    <p>
-      Bij scenario's met slechts een admin op <em>volgen</em> (A volgt - B mute of A mute - B volgt)
-      is "na lezen" visueel gelijk aan de basisrij zonder nieuw bericht.
-      Een tweede mute is niet toegestaan: er moet altijd minimaal een admin op <em>volgen</em> blijven.
-    </p>
 
     <!-- ===================== TABLE 1B ===================== -->
     <h2>Flow tabel (uit matrix)</h2>
     <p>
       Onderstaande flow vertaalt de matrix naar concrete situaties in de praktijk.
       Zodra Admin A of Admin B het bericht leest, verdwijnt het rode bolletje voor die admin.
+      Bij een admin-bericht krijgt de andere admin geen notificatie.
     </p>
 
     <table>
@@ -308,13 +291,13 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td class="left">Bij een nieuw binnenkomend dossier of dossier uit archief staan beide admins op volgen.</td>
-          <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="eye"></i></td>
+          <td class="left">Bij een nieuw binnenkomend dossier of dossier uit archief staan dit bij beide admins op niet altijd zichtbaar.</td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
         </tr>
         <tr>
           <td>2</td>
-          <td class="left">Er komt een nieuw bericht binnen terwijl beide admins op volgen staan.</td>
+          <td class="left">Er komt een nieuw bericht van de adviseur binnen; het dossier wordt dan bij beide admins altijd zichtbaar.</td>
           <td>
             <span class="icon-stack">
               <i data-lucide="eye"></i>
@@ -347,55 +330,31 @@
         </tr>
         <tr>
           <td>5</td>
-          <td class="left">Admin B zet deze chat op mute; alleen Admin A blijft volgen.</td>
+          <td class="left">Admin A stuurt een bericht naar de adviseur; Admin B krijgt geen notificatie.</td>
           <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
+          <td><i data-lucide="eye"></i></td>
         </tr>
         <tr>
           <td>6</td>
-          <td class="left">Er komt daarna een nieuw bericht binnen; alleen de admin die volgt krijgt een bolletje.</td>
-          <td>
-            <span class="icon-stack">
-              <i data-lucide="eye"></i>
-              <span class="badge-dot"></span>
-            </span>
-          </td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
+          <td class="left">Admin A wisselt naar niet altijd zichtbaar.</td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td><i data-lucide="eye"></i></td>
         </tr>
         <tr>
           <td>7</td>
-          <td class="left">Admin A leest het bericht; het bolletje verdwijnt weer.</td>
-          <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td class="left">Admin A zet de chat op mute en Admin B blijft volgen.</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
-          <td><i data-lucide="eye"></i></td>
-        </tr>
-        <tr>
-          <td>9</td>
-          <td class="left">Admin B probeert nu ook op mute te zetten; dit is niet toegestaan omdat altijd minstens een admin moet volgen.</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
-          <td><i data-lucide="eye"></i></td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td class="left">Bij een nieuw bericht in deze situatie ziet alleen Admin B het bolletje.</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
+          <td class="left">Er komt een bericht van de adviseur binnen; beide admins gaan naar altijd zichtbaar met rood bolletje.</td>
           <td>
             <span class="icon-stack">
               <i data-lucide="eye"></i>
               <span class="badge-dot"></span>
             </span>
           </td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td class="left">Admin B leest het bericht; het bolletje verdwijnt bij Admin B.</td>
-          <td><i data-lucide="bell-off" class="muted"></i></td>
-          <td><i data-lucide="eye"></i></td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot"></span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -472,19 +431,19 @@
 
     <!-- ===================== SETTINGS (OPTION 1) ===================== -->
     <h2>Chat instellingen </h2>
-    <p>Snelle chips bovenaan het chat venster om rol en pin te regelen.</p>
+    <p>Snelle chips bovenaan het chat venster om zichtbaarheid en pin te regelen.</p>
 
     <div class="chat-settings">
-      <div class="settings-row" aria-label="Rol keuze">
-        <span class="settings-label">Rol</span>
+      <div class="settings-row" aria-label="Zichtbaarheid keuze">
+        <span class="settings-label">Zichtbaarheid</span>
         <div class="chip-group">
           <button class="chip active" type="button">
             <i data-lucide="eye"></i>
-            <span>Volgen</span>
+            <span>Altijd zichtbaar</span>
           </button>
           <button class="chip" type="button">
-            <i data-lucide="bell-off" class="muted"></i>
-            <span>Mute</span>
+            <i data-lucide="eye-off" class="visibility-off"></i>
+            <span>Niet altijd zichtbaar</span>
           </button>
         </div>
       </div>
@@ -497,7 +456,7 @@
             <span>Gepind</span>
           </button>
           <button class="chip toggle off" type="button" aria-label="Niet gepind">
-            <i data-lucide="pin" class="muted"></i>
+            <i data-lucide="pin" class="pin off"></i>
             <span>Niet gepind</span>
           </button>
         </div>
