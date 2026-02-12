@@ -74,11 +74,19 @@
         border-radius: 999px;
         border: 2px solid #fff;
       }
+      .badge-dot.blue {
+        background: #3b82f6;
+      }
 
       .lucide { width: 16px; height: 16px; }
       .pin { color: #dc2626; }
       .pin.off { color: #d1d5db; }
       .visibility-off { color: #d1d5db; }
+      .inline-icon {
+        display: inline-flex;
+        vertical-align: middle;
+        margin: 0 4px;
+      }
 
       .example-row {
         display: inline-flex;
@@ -166,23 +174,89 @@
   <body>
     <h1>Chat UX – Rol × nieuw bericht</h1>
     <p>
-      Notificaties gelden alleen voor berichten tussen <strong>admin</strong> en <strong>adviseur</strong>
-      (en andersom). Als een admin een bericht stuurt, krijgt de andere admin geen notificatie.
+      Notificaties gelden voor berichten tussen <strong>admin</strong> en <strong>adviseur</strong>
+      (en vice versa). Stuurt een admin een bericht, dan krijgt de andere admin geen notificatie.
     </p>
     <p>
-      <strong>Altijd zichtbaar:</strong> Het dossier is te allen tijde boven in de werkvoorraad zichtbaar,
+      Een <strong>blauw bolletje</strong>
+      <span class="inline-icon icon-stack">
+        <i data-lucide="eye"></i>
+        <span class="badge-dot blue"></span>
+      </span>
+      betekent: bericht verstuurd, nog ongelezen door ontvanger.
+    </p>
+    <p>
+      <strong>Altijd zichtbaar:</strong>
+      <span class="inline-icon"><i data-lucide="eye"></i></span>
+      Het dossier is te allen tijde boven in de werkvoorraad zichtbaar,
       ook al is er een filter actief.
     </p>
     <p>
-      <strong>Niet altijd zichtbaar:</strong> Het dossier is enkel zichtbaar als er geen filter actief is
+      <strong>Volgt filter:</strong>
+      <span class="inline-icon"><i data-lucide="eye-off" class="visibility-off"></i></span>
+      Het dossier is enkel zichtbaar als er geen filter actief is
       of als het dossier voldoet aan de filtercriteria.
     </p>
 
     <p>
-      Legenda migratie: het <strong>rode bolletje</strong> is de vervanging van de
-      <strong>zwarte kleur</strong> uit de oude implementatie. De <strong>pin</strong>
+      Legenda migratie: het <strong>rode bolletje</strong>
+      <span class="inline-icon icon-stack">
+        <i data-lucide="eye"></i>
+        <span class="badge-dot"></span>
+      </span>
+      is de vervanging van de <strong>zwarte kleur</strong> uit de oude implementatie.
+    </p>
+    <p>
+      De <strong>pin</strong>
+      <span class="inline-icon"><i data-lucide="pin" class="pin"></i></span>
       is de vervanging van de <strong>blauwe kleur</strong>.
     </p>
+    <h2>Legenda</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Icoon</th>
+          <th class="left">Omschrijving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td class="left">Volgt filter</td>
+        </tr>
+        <tr>
+          <td><i data-lucide="eye"></i></td>
+          <td class="left">Altijd zichtbaar</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot"></span>
+            </span>
+          </td>
+          <td class="left">Nieuw bericht</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot blue"></span>
+            </span>
+          </td>
+          <td class="left">Verzonden, nog ongelezen door ontvanger</td>
+        </tr>
+        <tr>
+          <td><i data-lucide="pin" class="pin"></i></td>
+          <td class="left">Reminder op chat</td>
+        </tr>
+        <tr>
+          <td><i data-lucide="pin" class="pin off"></i></td>
+          <td class="left">Geen reminder</td>
+        </tr>
+      </tbody>
+    </table>
+
     <!-- ===================== TABLE 1 ===================== -->
     <h2>Rol × nieuw bericht (matrix)</h2>
     <p>
@@ -202,7 +276,7 @@
       <tbody>
         <!-- 1 -->
         <tr>
-          <td class="left">A niet altijd zichtbaar – B niet altijd zichtbaar</td>
+          <td class="left">A Volgt filter – B Volgt filter</td>
           <td><i data-lucide="eye-off" class="visibility-off"></i></td>
           <td><i data-lucide="eye-off" class="visibility-off"></i></td>
         </tr>
@@ -258,7 +332,12 @@
         <!-- 6 -->
         <tr>
           <td class="left">A altijd zichtbaar – B altijd zichtbaar (Admin A stuurt bericht)</td>
-          <td><i data-lucide="eye"></i></td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot blue"></span>
+            </span>
+          </td>
           <td><i data-lucide="eye"></i></td>
         </tr>
 
@@ -266,7 +345,12 @@
         <tr>
           <td class="left">A altijd zichtbaar – B altijd zichtbaar (Admin B stuurt bericht)</td>
           <td><i data-lucide="eye"></i></td>
-          <td><i data-lucide="eye"></i></td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot blue"></span>
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -291,7 +375,7 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td class="left">Bij een nieuw binnenkomend dossier of dossier uit archief staan dit bij beide admins op niet altijd zichtbaar.</td>
+          <td class="left">Bij een nieuw binnenkomend dossier of dossier uit archief staan dit bij beide admins op Volgt filter.</td>
           <td><i data-lucide="eye-off" class="visibility-off"></i></td>
           <td><i data-lucide="eye-off" class="visibility-off"></i></td>
         </tr>
@@ -331,17 +415,39 @@
         <tr>
           <td>5</td>
           <td class="left">Admin A stuurt een bericht naar de adviseur; Admin B krijgt geen notificatie.</td>
-          <td><i data-lucide="eye"></i></td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot blue"></span>
+            </span>
+          </td>
           <td><i data-lucide="eye"></i></td>
         </tr>
         <tr>
           <td>6</td>
-          <td class="left">Admin A wisselt naar niet altijd zichtbaar.</td>
-          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td class="left">Admin A ziet een blauw bolletje: bericht verstuurd, nog niet gelezen door adviseur.</td>
+          <td>
+            <span class="icon-stack">
+              <i data-lucide="eye"></i>
+              <span class="badge-dot blue"></span>
+            </span>
+          </td>
           <td><i data-lucide="eye"></i></td>
         </tr>
         <tr>
           <td>7</td>
+          <td class="left">Nadat de adviseur het bericht leest, verdwijnt het blauw bolletje.</td>
+          <td><i data-lucide="eye"></i></td>
+          <td><i data-lucide="eye"></i></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="left">Admin A wisselt naar Volgt filter.</td>
+          <td><i data-lucide="eye-off" class="visibility-off"></i></td>
+          <td><i data-lucide="eye"></i></td>
+        </tr>
+        <tr>
+          <td>9</td>
           <td class="left">Er komt een bericht van de adviseur binnen; beide admins gaan naar altijd zichtbaar met rood bolletje.</td>
           <td>
             <span class="icon-stack">
@@ -443,7 +549,7 @@
           </button>
           <button class="chip" type="button">
             <i data-lucide="eye-off" class="visibility-off"></i>
-            <span>Niet altijd zichtbaar</span>
+            <span>Volgt filter</span>
           </button>
         </div>
       </div>
